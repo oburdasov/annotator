@@ -1,0 +1,65 @@
+$header-height: 80px;
+
+header {
+  position: fixed;
+  top: 0;
+
+  display: flex;
+  align-items: center;
+
+  width: 100%;
+  height: $header-height;
+  padding: 20px;
+  box-sizing: border-box;
+
+  background: var(--tui-background-base-alt);
+  color: var(--tui-text-primary);
+}
+
+.title {
+  text-transform: capitalize;
+}
+
+.zoom-percentage {
+  font-size: 16px;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-left: auto;
+}
+
+.scroll-container {
+  position: relative;
+  height: calc(100vh - $header-height);
+  margin-top: $header-height;
+  width: 100%;
+  overflow: auto;
+
+  background: var(--tui-background-neutral-2);
+}
+
+.document-pages {
+  width: calc(800px * var(--zoom-scale));
+  transition: width 0.2s ease;
+}
+
+.page {
+  margin-bottom: 16px;
+  cursor: pointer;
+
+  & img {
+    width: 100%;
+  }
+}
+
+.annotations-container {
+  position: absolute;
+  top: 0;
+
+  transform-origin: top left;
+  transform: scale(var(--zoom-scale));
+  transition: transform 0.2s ease;
+}

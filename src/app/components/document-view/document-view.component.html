@@ -1,0 +1,56 @@
+@let scale = zoomScale();
+<header>
+  <h1 class="title">{{ document()?.name }}</h1>
+
+  <section class="controls">
+    <div class="zoom-percentage">{{ scale * 100 | number : '1.0-0' }}%</div>
+    <button
+      (click)="zoomIn()"
+      [disabled]="scale === maxScale"
+      appearance="primary"
+      iconStart="@tui.plus"
+      size="s"
+      tuiIconButton
+      type="button"
+    >
+      Zoom in
+    </button>
+
+    <button
+      (click)="zoomOut()"
+      [disabled]="scale === minScale"
+      appearance="primary"
+      iconStart="@tui.minus"
+      size="s"
+      tuiIconButton
+      type="button"
+    >
+      Zoom out
+    </button>
+
+    <button (click)="saveDocument()" appearance="primary" size="s" tuiButton type="button">
+      Save
+    </button>
+  </section>
+</header>
+
+<main class="scroll-container" #scrollContainer (mousemove)="onDrag($event)" (mouseup)="stopDrag()">
+  <div #documentContainer class="document-pages" [style.--zoom-scale]="scale">
+    @for (page of document()?.pages; track $index) {
+    <div class="page" (click)="addAnnotation($event)" title="Add annotation">
+      <img [src]="'assets/' + page.imageUrl" alt="document's page" />
+    </div>
+    }
+  </div>
+
+  <div class="annotations-container" [style.--zoom-scale]="scale">
+    @for (annotation of annotations(); track $index; let index = $index) {
+    <app-annotation
+      [annotation]="annotation"
+      (deleteAnnotation)="deleteAnnotation(index)"
+      (startDrag)="startDrag($event, index)"
+    >
+    </app-annotation>
+    }
+  </div>
+</main>

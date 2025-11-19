@@ -1,0 +1,40 @@
+.annotation {
+  position: absolute;
+  padding: 10px 20px 10px 0;
+}
+
+.annotation-text {
+  padding: 4px;
+  min-width: 80px;
+
+  white-space: nowrap;
+  overflow-wrap: normal;
+  color: white;
+
+  background: #526ed3d0;
+  border-radius: 4px;
+  outline-color: var(--tui-background-accent-1);
+}
+
+.button-drag,
+.button-delete {
+  position: absolute;
+  right: -10px;
+  border-radius: 100%;
+}
+
+.button-drag {
+  cursor: grab;
+  bottom: -5px;
+}
+
+.button-delete {
+  top: -5px;
+}
+
+.annotation:not(:hover) .button-delete,
+.annotation:not(:hover) .button-drag {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease-in-out;
+}

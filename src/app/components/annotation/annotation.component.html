@@ -1,0 +1,35 @@
+@let annotationData = annotation();
+
+<div class="annotation" [style.top.px]="annotationData.posY" [style.left.px]="annotationData.posX">
+  <div
+    class="annotation-text"
+    #textElement
+    contenteditable
+    [(ngModel)]="annotationData.text"
+    (blur)="deleteIfEmpty()"
+  ></div>
+
+  <button
+    class="button-delete"
+    (click)="deleteAnnotation.emit()"
+    appearance="glass"
+    iconStart="@tui.x"
+    size="xs"
+    tuiIconButton
+    type="button"
+  >
+    Delete
+  </button>
+
+  <button
+    class="button-drag"
+    (mousedown)="onStartDrag($event)"
+    appearance="primary"
+    iconStart="@tui.move"
+    size="xs"
+    tuiIconButton
+    type="button"
+  >
+    Drag
+  </button>
+</div>
